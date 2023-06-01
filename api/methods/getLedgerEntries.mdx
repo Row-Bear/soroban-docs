@@ -72,14 +72,14 @@ pip install git+https://github.com/StellarCN/py-stellar-base.git@soroban
 :::
 
 ```python
-import stellar_sdk.xdr as xdr, stellar_sdk.soroban_types as soroban_types
+import stellar_sdk.xdr as xdr, stellar_sdk.soroban.types as soroban_types
 
 def get_ledger_key_symbol(contract_id, symbol_text):
     ledger_key = xdr.ledger_key.LedgerKey(
         type=xdr.ledger_entry_type.LedgerEntryType.CONTRACT_DATA,
         contract_data=xdr.ledger_key_contract_data.LedgerKeyContractData(
             contract_id=xdr.hash.Hash(bytes.fromhex(contract_id)),
-            key=soroban_types.Symbol(symbol_text)._to_xdr_sc_val()
+            key=soroban_types.Symbol(symbol_text).to_xdr_sc_val()
         )
     )
     return ledger_key.to_xdr()
